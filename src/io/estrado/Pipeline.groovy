@@ -1,6 +1,13 @@
 #!/usr/bin/groovy
 package io.estrado;
 
+def configKubectl(Map args) {
+    echo "running kubectl config"
+    sh "kubectl config set-cluster server01 --server ${args.kubernetes_server}"
+    sh "kubectl config set-context server01 --cluster server01 --user server01"
+    sh "kubectl config set-credentials server01 --username ${args.kubernetes_username} --token ${args.kubernetes_token}"
+}
+
 def kubectlTest() {
     // Test that kubectl can correctly communication with the Kubernetes API
     echo "running kubectl test"
