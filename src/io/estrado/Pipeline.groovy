@@ -6,6 +6,7 @@ def configKubectl(Map args) {
     sh "kubectl config set-cluster server01 --server ${args.kubernetes.server}"
     sh "kubectl config set-context server01 --cluster server01 --user server01"
     sh "kubectl config set-credentials server01 --token ${args.kubernetes.token}"
+    sh "kubectl config use-context server01"
 }
 
 def kubectlTest() {
