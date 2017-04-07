@@ -3,6 +3,7 @@ package io.estrado;
 
 def configKubectl(Map args) {
     echo "running kubectl config"
+    env.KUBECONFIG = "/tmp/.kubeconfig"
     sh "kubectl config set-cluster server01 --server ${args.kubernetes.server}"
     sh "kubectl config set-context server01 --cluster server01 --user server01"
     sh "kubectl config set-credentials server01 --username ${args.kubernetes.username} --token ${args.kubernetes.token}"
