@@ -92,7 +92,7 @@ def getContainerTags(config, Map tags = [:]) {
         // if PR branch tag with only branch name
         if (env.BRANCH_NAME.contains('PR')) {
             commit_tag = env.BRANCH_NAME
-            tags << ['commit': commit_tag]
+            tags.put('commit', commit_tag)
             return tags
         }
     } catch (Exception e) {
@@ -115,7 +115,7 @@ def getContainerTags(config, Map tags = [:]) {
     // master tag
     try {
         if (env.BRANCH_NAME == 'master') {
-            tags << ['master': 'latest']
+            tags.put('master', 'latest')
         }
     } catch (Exception e) {
         println "WARNING: branch unavailable from env. ${e}"
@@ -124,7 +124,7 @@ def getContainerTags(config, Map tags = [:]) {
     // build tag only if none of the above are available
     if (!tags) {
         try {
-            tags << ['build': env.BUILD_TAG]
+            tags.put('build', env.BUILD_TAG)
         } catch (Exception e) {
             println "WARNING: build tag unavailable from config.project. ${e}"
         }
