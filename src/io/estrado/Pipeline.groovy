@@ -107,7 +107,7 @@ def getContainerTags(config, Map tags = [:]) {
         } else {
             commit_tag = env.GIT_COMMIT_ID.substring(0, 7)
         }
-        tags << ['commit': commit_tag]
+        tags.put('commit', commit_tag)
     } catch (Exception e) {
         println "WARNING: commit unavailable from env. ${e}"
     }
